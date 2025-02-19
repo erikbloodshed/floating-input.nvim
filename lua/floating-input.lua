@@ -11,7 +11,7 @@ end
 function M.under_cursor(_)
 	return {
 		relative = "cursor",
-		row = 0,
+		row = 1,
 		col = 0,
 	}
 end
