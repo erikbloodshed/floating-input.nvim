@@ -45,7 +45,7 @@ function M.input(opts, on_confirm, win_config)
 		local col = vim.fn.col(".") - 1 -- Current column (0-based)
 
 		win_config = vim.tbl_deep_extend("force", win_config, {
-		relative = "editor",
+		relative = "cursor",
 		row = line,
 		col = col,
 		anchor = "NW",
