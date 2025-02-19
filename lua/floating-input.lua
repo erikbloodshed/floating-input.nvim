@@ -39,8 +39,17 @@ function M.input(opts, on_confirm, win_config)
 	win_config = vim.tbl_deep_extend("force", default_win_config, win_config)
 
 	-- Place the window near cursor or at the center of the window.
-	if prompt == "New Name: " then
-		win_config = vim.tbl_deep_extend("force", win_config, M.under_cursor(win_config.width))
+	if opts.rename then
+		local pos = vim.api.nvim_win_get_cursor(0) -- {row, col}
+		local line = pos[1] - 1 -- Convert to 0-based index
+		local col = vim.fn.col(".") - 1 -- Current column (0-based)
+
+		win_config = vim.tbl_deep_extend("force", win_config, {
+		relative = "editor",
+		row = line,
+		col = col,
+		anchor = "NW",
+	})
 	else
 		win_config = vim.tbl_deep_extend("force", win_config, M.window_center(win_config.width))
 	end
